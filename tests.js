@@ -1,11 +1,17 @@
-// Run: node tests.js. Isolated evaluation of pure engine definitions.
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const src=fs.readFileSync(__dirname+'/game.js','utf8').split('let state=safeLoad();')[0];
-const ctx=vm.createContext({});vm.runInContext(src+';globalThis.api={rng,shuffle,initial,CARDS,BY_ID};',ctx);const {rng,shuffle,initial,CARDS}=ctx.api;
-const a=rng(42),b=rng(42);for(let i=0;i<100;i++)assert.strictEqual(a(),b());
-assert.strictEqual(CARDS.length,10);
-assert.strictEqual(initial().deck.length,9);
-assert.strictEqual(initial().coins,100);
-const r=rng(3),items=['a','b','c','d'];const shuffled=shuffle(items,r);assert.strictEqual(shuffled.length,4);assert.strictEqual(new Set(shuffled).size,4);assert.strictEqual(items.join(''),'abcd');
-for(const c of CARDS){assert(c.cost>=1&&c.cost<=3);assert(c.power>0)}
-console.log('✓ 8 Prüfungen erfolgreich: Seed, Kartenzahl, Startdeck, Startgold, Shuffle-Länge, Shuffle-Eindeutigkeit, Eingabe unverändert, Kartendaten.');
+const src=fs.readFileSync(__dirname+'/game.js','utf8');
+const context={localStorage:{getItem:()=>null,setItem:()=>{}},document:{getElementById:()=>({innerHTML:'',classList:{remove(){},add(){}}}),querySelectorAll:()=>[],addEventListener:()=>{}},setTimeout,clearTimeout};
+vm.createContext(context);
+vm.runInContext(src.replace(/render\(\);\s*$/,'')+';globalThis.testApi={initial,rng,draw,startBattle,playCard,endTurn,enemyDeck,MIN_DECK,MAX_DECK,MAX_COPIES,CARDS,BY_ID,getState:()=>state,setState:s=>state=s}',context);
+const a=context.testApi;
+assert.equal(a.CARDS.length,20);
+assert.equal(a.initial().deck.length,12);
+assert.equal(a.MIN_DECK,12);assert.equal(a.MAX_DECK,18);assert.equal(a.MAX_COPIES,3);
+const r1=a.rng(42),r2=a.rng(42);for(let i=0;i<100;i++)assert.equal(r1(),r2());
+const state=a.initial();a.setState(state);a.startBattle();const b=state.battle;
+assert.equal(b.draw.length,9);assert.equal(b.enemyDraw.length,11);
+const original=b.draw.length; a.draw(b,100);assert.equal(b.draw.length,0);assert.equal(b.hand.length,original+3);assert.equal(b.discard.length,0);
+a.draw(b,5);assert.equal(b.hand.length,original+3,'Never reshuffle discard');
+const healState=a.initial();a.setState(healState);a.startBattle();const battle=healState.battle;battle.hand=['heal','heal','slash'];battle.energy=3;battle.hp=25;a.playCard(0);assert.equal(battle.exhaust.length,1);assert.equal(battle.healsTurn,1);assert.equal(battle.hp,32);a.playCard(0);assert.equal(battle.exhaust.length,1,'Only one heal per turn');
+const enemy=a.enemyDeck(10,a.rng(1));assert.equal(enemy.length,12);assert(enemy.every(x=>x.type==='attack'||x.type==='block'));
+console.log('✓ 14 Prüfungen bestanden: Kartenzahl, Deckgrenzen, Kopienlimit, Seed, endlicher Spieler- und Gegnerstapel, kein Reshuffle, Heilungsbegrenzung, verbrauchte Heilkarte, Gegneraktionen.');
