@@ -1,20 +1,22 @@
-# Duel Deck – Fantasy Arena v0.2
+# ÄTHERBRUCH v0.4 — Die vier Orden
 
-## Auf dem iPhone spielen
-Alle Dateien `index.html`, `game.js`, `manifest.webmanifest` in das **Stammverzeichnis** deines GitHub-Pages-Repositories hochladen und vorhandene Dateien ersetzen. Unter **Settings → Pages** `main` und `/ (root)` wählen. Safari ggf. neu laden.
+Mobile-first fantasy collectible card game prototype, playable on GitHub Pages without build steps.
 
-## Regeln
-- 48 Lebenspunkte, 3 Energie pro Runde, 3 Karten pro Zug.
-- Deck: mindestens 12, maximal 18 Karten; maximal 3 Kopien je Karte und nicht mehr als im Besitz.
-- **Keine automatische Neu-Mischung:** Gezogene Karten kommen nach Verwendung/Ablage nicht zurück.
-- Heilzauber sind nach Einsatz **verbraucht** und höchstens eine Heilkarte pro Zug ist spielbar.
-- Der Gegner besitzt einen endlichen, vorab gemischten Stapel aus 12 Aktionen.
-- Wenn eine Seite keine Karten mehr ziehen kann, erhält sie ab dann pro Runde steigenden Erschöpfungsschaden.
-- Gegnerstärke steigt langsamer, insbesondere ab Kapitel 10.
-- Alte Speicherstände aus v0.1 werden beim Laden migriert; laufende alte Duelle werden zurückgesetzt.
-- Weitere Fantasy-Karten: Elfen, Zwerge, Drachen, Paladine, Phönix, Golem, Greif, Hexe.
+## Installation on iPhone
+Upload `index.html`, `game.js`, `manifest.webmanifest` to the root of your GitHub repository `jagarex-lab/duel-deck`. Commit and wait for GitHub Pages deployment. Open `https://jagarex-lab.github.io/duel-deck/?v=4` in Safari. HTML references `game.js?v=4` to refresh cached scripts.
+
+## Changes
+- 62 unique cards total (32 prior + 30 new), four visual factions: Aschenpakt, Gezeitenorden, Dornenzirkel, Nachtkonklave.
+- Original sigil-driven vector art using HTML/CSS: no licensed art, no network dependencies.
+- Enemy uses actual 12-card deck, hand (max 5), 3 energy per turn, 3 drawn cards per turn, discard and exhausted healing cards.
+- Enemy AI evaluates playable cards and its own remaining energy, with an approximate damage/block telegraph.
+- Finite decks and symmetrical escalating fatigue when hand and draw pile empty.
+- Player 12–18 card deck, max 3 copies; retain unused cards, discard manually on overflow.
+- Automatic migration of v1–v3 localStorage savegames; ongoing combat resets on version migration.
+- Export saves before updating as precaution.
 
 ## Tests
-`node tests.js` (Node.js nur für Entwicklung/Tests erforderlich, nicht zum Spielen auf iPhone).
+Run `node tests.js` with Node 20+. No packages required.
 
-Prototyp ohne Echtgeldkäufe, Server oder Werbung.
+## Limitations
+The AI uses a heuristic, not exhaustive search; no multiplayer or real-money monetization. CSS sigil art is a coherent original prototype art direction, not a finished illustration set.
