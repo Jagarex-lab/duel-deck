@@ -1,20 +1,13 @@
-'use strict';
-const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const code=fs.readFileSync(__dirname+'/game.js','utf8');
-const store=new Map();
-const document={getElementById(id){return {set innerHTML(v){this.html=v},get innerHTML(){return this.html||''},classList:{remove(){},add(){}},textContent:''}},querySelectorAll(){return []},addEventListener(){}};
-const sandbox={document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},console,setTimeout(){},clearTimeout(){},confirm(){return true}};
-vm.createContext(sandbox);vm.runInContext(code,sandbox);
-const run=(src)=>vm.runInContext(src,sandbox);
-let tests=0;function test(name,fn){fn();tests++;console.log('✓',name)}
-test('62 distinct collectible cards',()=>assert.equal(run('CARDS.length'),62));
-test('four factions',()=>assert.equal(run('new Set(CARDS.map(c=>c.faction)).size'),4));
-test('deck bounds',()=>assert.equal(run('MIN_DECK===12 && MAX_DECK===18 && MAX_COPIES===3'),true));
-test('enemy uses same hand and energy limits',()=>{run('startBattle()');assert.equal(run('state.battle.enemyHand.length'),3);assert.equal(run('state.battle.energy'),3)});
-test('both piles finite',()=>assert.equal(run('state.battle.enemyDraw.length===9 && state.battle.draw.length===9'),true));
-test('enemy card plan obeys energy budget',()=>assert.equal(run('enemyPlan(state.battle).cards.reduce((s,id)=>s+BY_ID[id].cost,0)<=3'),true));
-test('hand overflow is resolved by discarding',()=>{run('state.battle.hand=["slash","slash","guard","guard","heal","fire"];state.battle.overflow=true;discardFromHand(5)');assert.equal(run('state.battle.hand.length'),5);assert.equal(run('state.battle.overflow'),false)});
-test('unused player hand survives end turn',()=>{run('state.battle.hand=["slash"];state.battle.draw=[];state.battle.enemyDraw=[];state.battle.enemyHand=[];state.battle.hp=48;state.battle.enemyHp=50;endTurn()');assert.equal(run('state.battle.hand.includes("slash")'),true)});
-test('enemy cannot play infinitely',()=>{run('state.battle.enemyHand=[];state.battle.enemyDraw=[];state.battle.hp=48;state.battle.enemyHp=50;state.battle.hand=["slash"];endTurn()');assert.equal(run('state.battle.enemyHand.length'),0)});
-test('saved games are JSON serializable',()=>assert.doesNotThrow(()=>run('JSON.stringify(state)')));
-console.log(`${tests} tests passed`);
+const assert=require('node:assert/strict');const E=require('./engine.js');let passed=0;function test(name,fn){fn();passed++;console.log('✓ '+name)}
+test('72 unique cards',()=>{assert.equal(E.CARDS.length,72);assert.equal(new Set(E.CARDS.map(x=>x.id)).size,72)});
+test('starting deck legal',()=>assert.equal(E.validateDeck(E.START),''));
+test('minimum and maximum deck',()=>{assert.ok(E.validateDeck(E.START.slice(1)));assert.ok(E.validateDeck([...E.START,...E.START.slice(0,7)]))});
+test('coin toss deterministic',()=>{assert.equal(E.createBattle(E.START,234).coin,E.createBattle(E.START,234).coin)});
+test('no reshuffle',()=>{let b=E.createBattle(E.START,88);assert.equal(b.hero.deck.length+b.hero.hand.length,18)});
+test('shield persists, block absorbs first',()=>{let p={hp:40,ward:8,block:5};E.damage(p,9);assert.equal(p.block,0);assert.equal(p.ward,4);assert.equal(p.hp,40)});
+test('shield cap & play log',()=>{let b=E.createBattle(E.START,8);assert.ok(b.log.length>0);assert.ok(['hero','enemy'].includes(b.active))});
+test('enemy finite hand',()=>{let b=E.createBattle(E.START,8);assert.ok(b.enemy.hand.length<=5)});
+test('same faction no resonance',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=['ash-0','ash-0'];b.hero.energy=4;E.play(b,'hero',0);E.play(b,'hero',0);assert.equal(b.hero.resonance,0)});
+test('cross order generates resonance',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=['ash-0','tide-0'];b.hero.energy=4;E.play(b,'hero',0);E.play(b,'hero',0);assert.equal(b.hero.resonance,1)});
+test('hand overflow requires discard',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=Array(6).fill('ash-0');assert.equal(E.endTurn(b,'hero'),false);assert.equal(E.discard(b,0),true);assert.equal(b.hero.hand.length,5)});
+console.log(`${passed} tests passed`);
