@@ -32,3 +32,12 @@ v0.5 verwendet `aetherbruch-v05-save`. Bei der ersten Ausführung werden aus `du
 ## Status
 
 Spielbarer Prototyp, kein produktionsreifes App-Store-Spiel. Kartenillustrationen sind bewusst individuell gerahmte Platzhalter. Die Mechanik ist ein eigener Prototyp; absolute weltweite Neuheit wird nicht behauptet. Vor kommerzieller Veröffentlichung: ausführliche Balance-, UX-, Datenschutz-, Rechte- und App-Store-Tests.
+
+## Hotfix v0.5.1 (02.11.2026)
+- Kritischen Startabsturz in `starterOwned()` behoben (`Object.fromEntries` wurde falsch auf ein Objekt angewendet).
+- Ungültige importierte Decks werden abgelehnt; ältere gespeicherte Decks werden beim Start auf das gültige Startdeck zurückgesetzt.
+- Speicherfehler im Browser werden abgefangen, damit die Oberfläche nicht vollständig abstürzt.
+- Alle JavaScript- und CSS-Dateien verwenden `?v=5.1` zur Cache-Aktualisierung auf Safari.
+- Tests: `node tests.js`, `node ui-smoke.test.js`, `node --check game.js`, `node --check engine.js`.
+
+**Wichtig:** Der UI-Smoke-Test verwendet eine simulierte DOM-Umgebung. Ein echter Safari-Test auf iPhone wurde nicht durchgeführt; dies ist keine Garantie auf Fehlerfreiheit. Bitte den bestehenden Spielstand vor dem Update exportieren.
