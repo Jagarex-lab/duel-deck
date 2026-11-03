@@ -1,13 +1,10 @@
-# NACHTSIEGEL v1.9 – Kartenstatus & Logikprüfung
+# NACHTSIEGEL v2.0 – Admin-Testlabor und Regelkorrekturen
 
-Installiere die sechs Dateien im Stammverzeichnis des GitHub-Pages-Repositories.
-
-## Änderungen
-- Statusdifferenzen ausschließlich direkt auf Kreaturenkarten: Lebenspunkte, Angriff, Betäubung (rot für negativ, grün für positiv). Keine schwebenden Statuszahlen über Helden oder Ressourcen.
-- Die Wiedergabe verwendet die tatsächlichen protokollierten Kampfzustände. Nach einem finalen Schlag wird das Kampfergebnis erst nach der Animation eingeblendet; Animation überspringen bleibt verfügbar.
-- Vergeltung wird nicht mehr ausgelöst, wenn der Verteidiger durch den Angriff bereits gefallen ist oder kein Angriffsschaden verursacht wurde.
-- Betäubte Kreaturen verlieren nach ihrer ausgesetzten Angriffsphase die Beschwörungsverzögerung, sodass sie nicht noch einen zusätzlichen Zug warten müssen.
-- Mehrfaches Protokollieren eines Siegs wird verhindert.
-- Angriffe auf freie Gegenfelder treffen weiterhin den Helden; zuerst Block, dann Schild, dann Leben.
-
-Hinweis: Bestehende Spielstände bleiben erhalten; vor dem Aktualisieren exportieren. Echter iPhone-Safari-Test noch ausstehend.
+- Dauerhafte grüne/rote Färbung von Angriff und aktuellen Lebenspunkten der Kreatur relativ zum aufgedruckten Basiswert; gilt auch in der Kampfanimation.
+- Kartenverbrennen ausschließlich bei notwendigem Handüberlauf vor dem Ziehen, exakt bis das Handlimit 6 eingehalten wird. Ziehen ist bis dahin gesperrt. KI folgt derselben Regel.
+- Keine Splitter für Niederlagen; Aufgabe bringt ebenfalls keine Belohnung.
+- Admin-Testlabor ist standardmäßig aktiv: alle 100 Karten zum Deckbau verfügbar; Arena-Kämpfe zum Testen. Shop, Sammlung, Deck und Chronik bleiben im Menü.
+- Refresh-Knopf unter Chronik: erneuter Abruf mit Cache-Busting, löscht keine lokalen Spielstände.
+- Kampf aufgeben bleibt im Arena-Bildschirm verfügbar.
+- GitHub Pages: lade alle sechs Spieldateien in das Stammverzeichnis hoch.
+- Safari-Echtgerätetest noch ausstehend.
