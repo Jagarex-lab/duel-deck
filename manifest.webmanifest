@@ -1,1 +1,10 @@
-{"name": "NACHTSIEGEL – Die fünf Pfade", "short_name": "NACHTSIEGEL", "start_url": "./", "display": "standalone", "background_color": "#080a10", "theme_color": "#080a10", "lang": "de"}
+{
+  "name": "NACHTSIEGEL – Die fünf Pfade",
+  "short_name": "NACHTSIEGEL",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#080a10",
+  "theme_color": "#080a10",
+  "lang": "de",
+  "orientation": "landscape"
+}

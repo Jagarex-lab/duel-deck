@@ -60,3 +60,102 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.2;bac
 @media(min-width:720px){.lane{min-height:165px}.lane-portrait{height:75px}.hand{grid-template-columns:repeat(5,minmax(0,1fr))}.card{min-height:255px}.art{min-height:125px}}
 @media(max-width:390px){.battlefield{padding:9px}.lanegrid{gap:3px}.lane{min-height:119px;padding:4px 1px}.lane-portrait{height:40px}.lane strong{font-size:8px}.lane .card-stats{font-size:10px!important}.combatant{padding-left:38px}.hero-crest{left:4px;width:29px;height:38px;font-size:25px}.statline{font-size:10px}.hand{gap:5px}.card{min-height:212px;padding:5px}.carddesc{font-size:9px}.fieldmiddle-text{font-size:8px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* NACHTSIEGEL 2.7 – landscape-first mobile arena. Engine/rules untouched. */
+.ns-mobile-battle-title{display:none}
+@media (max-width:950px) and (orientation:landscape){
+ body.ns-in-battle{overflow:hidden;background:#080b11}
+ body.ns-in-battle #app{max-width:none;width:100%;height:100dvh;overflow:hidden;padding:0!important;margin:0}
+ body.ns-in-battle .ns-header{display:none}
+ body.ns-in-battle #nav,body.ns-in-battle~#nav{display:none}
+ body.ns-in-battle .battlefield{position:absolute;inset:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);width:auto;height:auto;overflow:hidden;margin:0;padding:5px 9px!important;display:grid;grid-template-columns:minmax(100px,17%) minmax(0,1fr) minmax(116px,19%);grid-template-rows:23px minmax(0,1fr) 20px minmax(0,1fr) 28px;gap:3px 8px;border-radius:9px;align-items:stretch}
+ body.ns-in-battle .ns-mobile-battle-title{display:block;grid-column:1;grid-row:1;font:700 12px Georgia,serif;letter-spacing:1px;color:#eac994;white-space:nowrap}
+ body.ns-in-battle .ns-mobile-battle-title span{font:10px system-ui;color:#9a9da7}
+ body.ns-in-battle .battlefield>.row:first-of-type{display:none}
+ body.ns-in-battle .combatants{grid-column:1;grid-row:2/5;display:flex;flex-direction:column;gap:5px;min-height:0;margin:0}
+ body.ns-in-battle .combatants>[data-hero]{flex:1;min-height:0}
+ body.ns-in-battle .combatant{height:100%;min-height:0;padding:6px 5px 4px 33px;border-radius:8px}
+ body.ns-in-battle .hero-crest{left:3px;width:25px;height:31px;font-size:20px}
+ body.ns-in-battle .combatant strong{font-size:12px}
+ body.ns-in-battle .statline,body.ns-in-battle .smallprint{font-size:10px;line-height:1.25}
+ body.ns-in-battle .combatant .bar{height:6px;margin:4px 0}
+ body.ns-in-battle .lanegrid{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:0;min-height:0;align-self:stretch}
+ body.ns-in-battle .lanegrid[data-grid=enemy]{grid-column:2;grid-row:2}
+ body.ns-in-battle .lanegrid[data-grid=hero]{grid-column:2;grid-row:4}
+ body.ns-in-battle .lane{min-height:0;height:100%;overflow:hidden;padding:2px;border-radius:6px}
+ body.ns-in-battle .lane-portrait{height:clamp(22px,9vh,55px)}
+ body.ns-in-battle .lane strong{font-size:clamp(8px,1.7vw,11px);line-height:1.1}
+ body.ns-in-battle .lane .card-stats{font-size:10px!important}
+ body.ns-in-battle .fieldmiddle{grid-column:2;grid-row:3;min-height:0;margin:0;padding:0}
+ body.ns-in-battle .fieldmiddle-text{font-size:9px;white-space:nowrap}
+ body.ns-in-battle .controlviz{grid-column:2;grid-row:1;margin:0;padding:0 6px;display:flex;align-items:center;justify-content:space-between;gap:7px;min-width:0;border-radius:5px}
+ body.ns-in-battle .controlviz-head,body.ns-in-battle .controlviz-note{display:none}
+ body.ns-in-battle .controlviz-grid{display:flex;flex:1;margin:0;gap:3px;max-width:210px}
+ body.ns-in-battle .controlviz-cell{min-height:15px;height:15px;flex:1;border-radius:3px;font-size:9px;flex-direction:row}
+ body.ns-in-battle .controlviz-cell b{display:none}
+ body.ns-in-battle .controlviz-score{font-size:10px;gap:8px;flex-wrap:nowrap;white-space:nowrap}
+ body.ns-in-battle .phase-track,body.ns-in-battle .cinematic-controls,body.ns-in-battle .fieldlabel,body.ns-in-battle .combat-preview,body.ns-in-battle .battlefield>p.smallprint{display:none!important}
+ body.ns-in-battle .combat-fx{grid-column:2;grid-row:5;min-height:0;margin:0;padding:3px 8px;font-size:10px;overflow:hidden;white-space:nowrap}
+ body.ns-in-battle .combat-fx span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ body.ns-in-battle .tactics{grid-column:3;grid-row:2;display:grid;grid-template-columns:1fr 1fr;gap:4px;align-content:start;margin:0}
+ body.ns-in-battle .actions{grid-column:3;grid-row:4;display:grid;grid-template-columns:1fr 1fr;gap:4px;align-content:end;margin:0}
+ body.ns-in-battle .tactics .btn,body.ns-in-battle .actions .btn{font-size:10px;padding:5px 3px;line-height:1.1;min-height:34px;white-space:normal}
+ body.ns-in-battle .actions [data-act=end]{grid-column:1/-1;background:#d9b477;color:#1b1510;font-weight:800}
+ body.ns-in-battle .draw-panel,body.ns-in-battle .notice{grid-column:3;grid-row:3/5;overflow:auto;margin:0;padding:6px;font-size:10px;z-index:5}
+ body.ns-in-battle .draw-panel p{font-size:10px;margin:4px 0}
+ body.ns-in-battle .draw-panel .btn{font-size:10px;padding:5px}
+ body.ns-in-battle .battlefield+.ns-hand-title,body.ns-in-battle .ns-hand-title{position:absolute;right:env(safe-area-inset-right);top:calc(env(safe-area-inset-top) + 2px);width:19%;font-size:11px;margin:0;text-align:center;z-index:3;pointer-events:none}
+ body.ns-in-battle .ns-battle-hand{position:absolute;right:calc(env(safe-area-inset-right) + 8px);top:calc(env(safe-area-inset-top) + 28px);width:calc(19% - 16px);height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 40px);display:flex;flex-direction:column;overflow-y:auto;gap:5px;z-index:2;padding:0 2px 5px;scrollbar-width:thin}
+ body.ns-in-battle .ns-battle-hand .card{flex:0 0 82px;min-height:82px;height:82px;overflow:hidden;padding:3px 5px;border-radius:7px}
+ body.ns-in-battle .ns-battle-hand .art{min-height:23px;height:23px}
+ body.ns-in-battle .ns-battle-hand .carddesc{display:none}
+ body.ns-in-battle .ns-battle-hand .card h3,body.ns-in-battle .ns-battle-hand .card strong{font-size:10px}
+ body.ns-in-battle .ns-chronicle,body.ns-in-battle [data-act=retire]{display:none}
+}
+@media (max-width:950px) and (orientation:portrait){
+ body.ns-in-battle:before{content:'↻  DREHE DEIN GERÄT INS QUERFORMAT';position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;background:radial-gradient(circle,#28202d,#080a10 72%);color:#f1d09a;font:700 20px Georgia,serif;letter-spacing:2px}
+}
+
+@media (max-width:950px) and (orientation:landscape){
+ body.ns-in-battle .battlefield{grid-template-columns:minmax(110px,19%) minmax(0,1fr) minmax(100px,16%)}
+ body.ns-in-battle .tactics{grid-column:1;grid-row:5;display:none}
+ body.ns-in-battle .actions{grid-column:1;grid-row:5;display:flex;position:absolute;bottom:0;left:0;right:0;z-index:4}
+ body.ns-in-battle .actions .btn:not([data-act=end]){display:none}
+ body.ns-in-battle .actions [data-act=end]{width:100%;min-height:26px}
+ body.ns-in-battle .ns-hand-title{width:16%!important}
+ body.ns-in-battle .ns-battle-hand{width:calc(16% - 16px)}
+ body.ns-in-battle .combat-fx{grid-column:2;grid-row:5}
+ body.ns-in-battle .draw-panel,body.ns-in-battle .notice{grid-column:2;grid-row:2/5;z-index:10}
+ body.ns-in-battle .tactics{display:flex;grid-column:1;grid-row:1;position:absolute;left:0;top:24px;z-index:3;flex-direction:column}
+ body.ns-in-battle .tactics .btn{min-height:24px;font-size:9px;padding:3px}
+ body.ns-in-battle .combatants{padding-top:64px;padding-bottom:30px}
+ body.ns-in-battle .actions{bottom:0}
+}
+
+/* v2.8: Landscape-first usable action drawer and card inspect */
+.ns-command-toggle,.ns-command-shade,.ns-command-heading{display:none}
+.ns-command-panel{display:contents}
+.ns-card-inspect{position:fixed;inset:0;z-index:11000;display:grid;place-items:center;padding:20px;background:#050509dd;backdrop-filter:blur(8px)}
+.ns-card-inspect-back{position:absolute;inset:0}
+.ns-card-inspect-content{position:relative;width:min(340px,85vw);max-height:88dvh;overflow:auto;border:2px solid var(--accent,#d4b278);border-radius:18px;padding:16px;background:linear-gradient(160deg,#29232c,#0d1019);box-shadow:0 16px 65px #000c;text-align:center;color:#f3e5d2}
+.ns-inspect-art{height:min(38dvh,240px);background-size:cover;background-position:center;border-radius:10px;margin-bottom:12px}
+.ns-inspect-order{font-size:11px;letter-spacing:2px;color:#dfbc86;text-transform:uppercase}
+.ns-card-inspect-content h2{font-size:22px;margin:10px 0}.ns-card-inspect-content p{line-height:1.5}
+.ns-inspect-close{position:absolute;right:12px;top:12px;border:1px solid #a28b70;border-radius:50%;width:32px;height:32px;background:#15131a;color:white;z-index:1}
+@media(max-width:950px) and (orientation:landscape){
+ body.ns-in-battle .ns-command-toggle{display:flex;position:fixed;bottom:calc(env(safe-area-inset-bottom) + 5px);left:calc(env(safe-area-inset-left) + 6px);z-index:50;align-items:center;gap:10px;background:linear-gradient(140deg,#d9b477,#9c7348);border:1px solid #f3d49e;border-radius:9px;padding:7px 11px;color:#19130f;font-size:12px;font-weight:800;box-shadow:0 3px 18px #0009}
+ body.ns-in-battle .ns-command-panel{display:block;position:fixed;z-index:102;left:env(safe-area-inset-left);top:env(safe-area-inset-top);bottom:env(safe-area-inset-bottom);width:min(320px,72vw);padding:12px;overflow-y:auto;background:linear-gradient(155deg,#2b2430,#0b1019);border-right:2px solid #b59462;box-shadow:15px 0 45px #000b;transform:translateX(-110%);transition:transform .22s ease}
+ body.ns-in-battle.ns-commands-open .ns-command-panel{transform:translateX(0)}
+ body.ns-in-battle.ns-commands-open .ns-command-shade{display:block;position:fixed;inset:0;z-index:101;background:#030307bb}
+ body.ns-in-battle .ns-command-heading{display:flex;justify-content:space-between;align-items:center;color:#eac98d;letter-spacing:2px;font:700 13px Georgia,serif;margin:4px 0 14px}
+ body.ns-in-battle .ns-command-heading button{background:#332b34;color:#fff;border:1px solid #8b775d;border-radius:8px;padding:6px 10px}
+ body.ns-in-battle .ns-command-panel .tactics,body.ns-in-battle .ns-command-panel .actions{display:flex!important;position:static!important;flex-direction:column!important;gap:10px!important;padding:0!important;margin:0 0 10px!important}
+ body.ns-in-battle .ns-command-panel .tactics .btn,body.ns-in-battle .ns-command-panel .actions .btn{display:block!important;position:static!important;width:100%!important;min-height:42px!important;font-size:13px!important;text-align:left!important;padding:10px!important}
+ body.ns-in-battle .ns-command-panel .actions [data-act=end]{background:#d9b477!important;color:#17120d!important;text-align:center!important}
+ body.ns-in-battle .combatants{padding-bottom:4px!important}
+ body.ns-in-battle .battlefield{overflow:hidden}
+ body.ns-in-battle .ns-battle-hand .card{position:relative;touch-action:pan-y}
+ body.ns-in-battle .ns-battle-hand .card:active{transform:scale(.97)}
+ body.ns-in-battle .ns-mobile-battle-title{pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){.ns-command-panel{transition:none!important}}

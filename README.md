@@ -1,16 +1,7 @@
-# NACHTSIEGEL v2.6 — Düstere Fantasy
+# NACHTSIEGEL v2.8 – Mobile Querformat-Arena
 
-Grafik- und Animations-Update auf Basis v2.5. **engine.js ist bytegenau unverändert**; alle Regeln, Standarddecks, Audit- und Replayfunktionen bleiben erhalten.
+Verbesserung gegenüber v2.7: ausklappbare Ritualaktionsleiste mit allen vier Fähigkeiten und Zug beenden, Touch-Langdruck für große Kartendetails, überarbeitetes kompaktes Layout. Im Querformat bleibt die Spielarena sichtbar. Im Hochformat Drehhinweis.
 
-## Neu
-- Mystische Arena mit fünf Pfaden, Ordensporträts, Runen, Licht und Tiefeneffekten
-- Vier lokal gespeicherte, skalierbare SVG-Illustrationswelten, ohne Bild-Hosting oder zusätzliche Bibliotheken
-- Neue Kartenoptik, Lebensanzeigen, Pfadstatus, Deckauswahl und mobile Navigation
-- Überarbeitete Treffer-, Beschwörungs- und Todesanimationen; bestehende Animationsgeschwindigkeit und Skip bleiben erhalten
-- Reduzierte Bewegung wird respektiert
+**Engine unverändert gegenüber v2.5/v2.7.** Multiplayer ist nicht implementiert. Auf iOS kann die Webseite den Bildschirm nicht selbst drehen.
 
-## Installation
-ZIP-Inhalt in das Root-Verzeichnis des GitHub-Pages-Repositories kopieren; insbesondere den Ordner `assets/` mit hochladen. `index.html` im Root. Auf dem iPhone nach dem Deploy Seite neu laden.
-
-## Abgrenzung
-Das Update erzeugt stilisierte, prozedurale Ordensillustrationen, keine individuellen handgemalten Artworks für alle 100 Kreaturen. Keine Netzwerk-Multiplayer-Funktion in v2.6.
+Dateien komplett in den `main`-Branch, inklusive echtem Ordner `assets/`, hochladen. GitHub Pages: `main` / `(root)`.
