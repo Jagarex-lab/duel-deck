@@ -33,3 +33,6 @@
 
 /* v2.0: Dauerhafte Differenz gegenüber gedruckten Basiswerten */
 .lane .card-stats{display:block;font-weight:800;font-size:13px}.lane .stat-up{color:#50e4a0!important;text-shadow:0 0 8px #00b56888}.lane .stat-down{color:#ff6575!important;text-shadow:0 0 8px #f1375588}
+
+.audit-replay{margin:12px 0;border:1px solid #46536b;border-radius:10px;padding:10px}.audit-replay summary{cursor:pointer;font-weight:700}.audit-replay .row{justify-content:space-around;gap:4px;margin:10px 0}.audit-state{white-space:pre-wrap;overflow-wrap:anywhere;max-height:280px;overflow:auto;font-size:10px;background:#090f19;border-radius:8px;padding:8px;color:#d5e5f8}.cinematic-controls select,.panel select{background:#111e31;color:#f3f4fa;border:1px solid #536078;border-radius:6px;padding:6px}
+.combat-preview{margin:8px 0;padding:9px;border:1px solid #506078;border-radius:9px}.combat-preview summary{cursor:pointer}.combat-preview .smallprint{line-height:1.8}.combat-preview hr{border:0;border-top:1px solid #303e51}
