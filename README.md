@@ -1,17 +1,28 @@
-# NACHTSIEGEL v0.8 — Die drei Siegelpfade
+# NACHTSIEGEL v0.9 – Die fünf Pfade
 
-## Installation auf GitHub Pages
-Die Dateien `index.html`, `game.js`, `engine.js`, `style.css` und `manifest.webmanifest` direkt in das Repository-Hauptverzeichnis hochladen bzw. ersetzen. Keine Unterordner verwenden. Die `tests.js` ist nur für lokale Tests und wird nicht für die Website benötigt.
+## Installation über iPhone / GitHub Pages
 
-## Neu in v0.8
-- 3 taktische Felder je Spieler; Beschwörungen bleiben stehen, bis sie besiegt werden. Am Ende des eigenen Zugs greift jede Beschwörung die gegnerische Einheit auf demselben Feld an oder, wenn frei, den Helden (Block vor Schild vor LP).
-- 12 neue Beschwörungskarten: 100 Kartenarten insgesamt. Beschwörungen kommen über Booster in die Sammlung.
-- 12 gerichtete Ordensreaktionen. Jeder Wechsel des Ordens während eines Zugs bringt weiterhin +2 Resonanz; zusätzlich wird die passende Reaktion ausgelöst.
-- Bei 15 Resonanz kann Siegelbruch ausgelöst werden: -8 Resonanz, 9 Schaden, +5 Schild. Vollresonanz-Energievorteil bleibt erhalten, solange 15 Resonanz gehalten werden.
-- Bestehende Handregeln (3 Startkarten, +2 je Folgezug, Limit 6), Deckeditor mit Karteneffekten, Shop und ein Modus bleiben erhalten.
+Lade die Dateien `index.html`, `engine.js`, `game.js`, `style.css`, `manifest.webmanifest` **direkt in das Stammverzeichnis** deines GitHub-Repositories. Keine zusätzlichen Unterordner hochladen. Nach Commit einige Minuten auf GitHub Pages warten und die Seite neu laden. `?v=9` kann beim Testen helfen. Die Skripte haben Cache-Busting `?v=9`.
 
-## Balance / Grenzen
-Dies ist eine frühe Balance-Version. Beschwörungen können lange auf dem Feld bleiben; umfangreiche KI-Simulationen und echte iPhone-Safari-Tests sind noch ausstehend. Die KI wählt das erste freie Feld; der Spieler wählt das Feld per Dialog. Der Spielstand bleibt unter dem bisherigen lokalen Schlüssel gespeichert. Laufende Kämpfe werden beim Neuladen zurückgesetzt.
+## Spielsystem
+
+- 100 Kreaturenkarten, 25 pro Orden; vier legendäre Bosskreaturen.
+- 5 gegenüberliegende Pfade pro Spieler. Jede Kreatur ist eine dauerhafte Spielfeldeinheit und greift am eigenen Zugende an, frühestens im Zug nach Beschwörung (außer Eile).
+- 20–25 Karten pro Deck; maximal 3 Kopien, legendäre nur 1.
+- Start: 3 Handkarten; +2 pro Folgezug, maximal 6 zu Zugbeginn.
+- 2 Startenergie; Resonanz bei 5/10/15 erhöht die Energie auf 3/4/5. Ordenswechsel geben +2 Resonanz und lösen eine Reaktion aus.
+- Bei 15 Resonanz eine ordensspezifische Entfesselung, die 8 Resonanz kostet und mindestens eine Kreatur des Ordens voraussetzt.
+- Block verfällt zum eigenen Zugbeginn, Schild bleibt bis zum Verbrauch.
+- Shop, Pocket-Filter, Deckeditor, Kampfchronik, Zurücksetz-Kobold.
+
+## Speicherstände
+
+Neuer Speicher-Key `nachtsiegel-creatures-v09`; vorhandene v0.6-Daten werden nach Möglichkeit übernommen, inklusive Besitz an Karten-IDs. Die alte v0.8-Version bleibt unangetastet. Export des alten Spielstands wird vor jedem Update empfohlen.
 
 ## Tests
-`node --check engine.js && node --check game.js && node tests.js`
+
+`node tests.js` und `node ui-smoke.test.js`; `node --check engine.js` und `node --check game.js`.
+
+## Einschränkungen
+
+Kreaturenbilder sind Platzhalter, die KI ist regelbasiert, keine vollständige Safari-E2E-Testumgebung. Balancewerte sind eine erste Iteration, keine statistisch validierte kompetitive Balance. Kampf wird beim Reload neu gestartet.
