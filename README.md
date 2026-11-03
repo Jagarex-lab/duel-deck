@@ -1,28 +1,18 @@
-# NACHTSIEGEL v0.9 – Die fünf Pfade
+# NACHTSIEGEL v1.0 – Balance-Hotfix
 
-## Installation über iPhone / GitHub Pages
+GitHub Pages: Dateien index.html, engine.js, game.js, style.css, manifest.webmanifest direkt in das Repository-Hauptverzeichnis laden. Nicht den Ordner hochladen. Safari lädt JS/CSS mit ?v=10.
 
-Lade die Dateien `index.html`, `engine.js`, `game.js`, `style.css`, `manifest.webmanifest` **direkt in das Stammverzeichnis** deines GitHub-Repositories. Keine zusätzlichen Unterordner hochladen. Nach Commit einige Minuten auf GitHub Pages warten und die Seite neu laden. `?v=9` kann beim Testen helfen. Die Skripte haben Cache-Busting `?v=9`.
+## Änderungen
+- 25 Karten im Startdeck; vorhandene v0.9-Spielstände mit 20 Karten werden beim Laden automatisch auf 25 ergänzt. Spielstand vorher exportieren.
+- Gegnerdeck: ebenfalls 25 Karten. Gegnerauswahl bleibt zufällig; die Kartenauswahl und Deckstärke sind noch nicht vollständig gleichwertig.
+- Erschöpfung: maximal einmal pro eigenem Zug, nur wenn Hand und Nachziehstapel leer sind. 1, 2, 3, danach maximal 3 Schaden pro betroffenem Zug.
+- Tatsächlich gezogene Karten werden korrekt protokolliert, dazu Restkarten im Stapel.
+- Zweiter Spieler erhält 4 dauerhafte Schildpunkte als Ausgleich.
+- Keine Änderungen an der Sammlung, Shop, Resonanz, den fünf Pfaden oder den 100 Kreaturen.
 
-## Spielsystem
+## Automatisierte Tests
+`node tests.js`
+`node ui-smoke.test.js`
+`node simulate.js 2000`
 
-- 100 Kreaturenkarten, 25 pro Orden; vier legendäre Bosskreaturen.
-- 5 gegenüberliegende Pfade pro Spieler. Jede Kreatur ist eine dauerhafte Spielfeldeinheit und greift am eigenen Zugende an, frühestens im Zug nach Beschwörung (außer Eile).
-- 20–25 Karten pro Deck; maximal 3 Kopien, legendäre nur 1.
-- Start: 3 Handkarten; +2 pro Folgezug, maximal 6 zu Zugbeginn.
-- 2 Startenergie; Resonanz bei 5/10/15 erhöht die Energie auf 3/4/5. Ordenswechsel geben +2 Resonanz und lösen eine Reaktion aus.
-- Bei 15 Resonanz eine ordensspezifische Entfesselung, die 8 Resonanz kostet und mindestens eine Kreatur des Ordens voraussetzt.
-- Block verfällt zum eigenen Zugbeginn, Schild bleibt bis zum Verbrauch.
-- Shop, Pocket-Filter, Deckeditor, Kampfchronik, Zurücksetz-Kobold.
-
-## Speicherstände
-
-Neuer Speicher-Key `nachtsiegel-creatures-v09`; vorhandene v0.6-Daten werden nach Möglichkeit übernommen, inklusive Besitz an Karten-IDs. Die alte v0.8-Version bleibt unangetastet. Export des alten Spielstands wird vor jedem Update empfohlen.
-
-## Tests
-
-`node tests.js` und `node ui-smoke.test.js`; `node --check engine.js` und `node --check game.js`.
-
-## Einschränkungen
-
-Kreaturenbilder sind Platzhalter, die KI ist regelbasiert, keine vollständige Safari-E2E-Testumgebung. Balancewerte sind eine erste Iteration, keine statistisch validierte kompetitive Balance. Kampf wird beim Reload neu gestartet.
+Das Ergebnis der 2.000 deterministischen Simulationen steht in balance-v10.json. Sie sind ein KI-Benchmark, kein echter iPhone-Safari-Test und kein Beweis für vollständige Balance.
