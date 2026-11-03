@@ -1,0 +1,145 @@
+{
+  "matches": 50,
+  "results": {
+    "hero": 34,
+    "enemy": 16,
+    "draw": 0,
+    "timeout": 0
+  },
+  "byDeck": {
+    "ash": {
+      "total": 5,
+      "hero": 3,
+      "enemy": 2,
+      "draw": 0,
+      "timeout": 0
+    },
+    "tide": {
+      "total": 5,
+      "hero": 3,
+      "enemy": 2,
+      "draw": 0,
+      "timeout": 0
+    },
+    "thorn": {
+      "total": 5,
+      "hero": 3,
+      "enemy": 2,
+      "draw": 0,
+      "timeout": 0
+    },
+    "veil": {
+      "total": 5,
+      "hero": 5,
+      "enemy": 0,
+      "draw": 0,
+      "timeout": 0
+    },
+    "ash-mono": {
+      "total": 5,
+      "hero": 1,
+      "enemy": 4,
+      "draw": 0,
+      "timeout": 0
+    },
+    "tide-mono": {
+      "total": 5,
+      "hero": 3,
+      "enemy": 2,
+      "draw": 0,
+      "timeout": 0
+    },
+    "thorn-mono": {
+      "total": 4,
+      "hero": 4,
+      "enemy": 0,
+      "draw": 0,
+      "timeout": 0
+    },
+    "veil-mono": {
+      "total": 4,
+      "hero": 3,
+      "enemy": 1,
+      "draw": 0,
+      "timeout": 0
+    },
+    "tempo": {
+      "total": 4,
+      "hero": 2,
+      "enemy": 2,
+      "draw": 0,
+      "timeout": 0
+    },
+    "control": {
+      "total": 4,
+      "hero": 3,
+      "enemy": 1,
+      "draw": 0,
+      "timeout": 0
+    },
+    "value": {
+      "total": 4,
+      "hero": 4,
+      "enemy": 0,
+      "draw": 0,
+      "timeout": 0
+    }
+  },
+  "byLevel": {
+    "1": {
+      "total": 22,
+      "hero": 19,
+      "enemy": 3,
+      "draw": 0,
+      "timeout": 0
+    },
+    "2": {
+      "total": 17,
+      "hero": 7,
+      "enemy": 10,
+      "draw": 0,
+      "timeout": 0
+    },
+    "5": {
+      "total": 11,
+      "hero": 8,
+      "enemy": 3,
+      "draw": 0,
+      "timeout": 0
+    }
+  },
+  "turns": 896,
+  "errors": [],
+  "effects": [
+    "drain",
+    "draw",
+    "guard",
+    "harvest",
+    "haste",
+    "mend",
+    "pierce",
+    "pulse",
+    "rally",
+    "retaliate",
+    "shift",
+    "silence",
+    "strike",
+    "ward",
+    "weaken",
+    "weave"
+  ],
+  "archetypes": [
+    "ash",
+    "tide",
+    "thorn",
+    "veil",
+    "ash-mono",
+    "tide-mono",
+    "thorn-mono",
+    "veil-mono",
+    "tempo",
+    "control",
+    "value"
+  ],
+  "avgTurns": 17.92
+}
