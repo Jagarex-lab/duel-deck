@@ -1,23 +1,11 @@
-# NACHTSIEGEL v2.2 – Admin-Testlabor / Multiplayer-orientierte Regeln
+# NACHTSIEGEL v2.3 – Pfadkontrolle und Kampfaudit
 
-Statische GitHub-Pages-Version, Dateien direkt in das Repository-Hauptverzeichnis laden.
+Neue Siegbedingung: Drei Nachtsiegel, je eines am Ende der eigenen Angriffsphase mit mindestens drei unbestrittenen besetzten Pfaden. Alternativ Sieg durch gegnerische HP = 0. Siegel sind dauerhaft und öffentlich sichtbar.
 
-## Änderungen
-- Kampfaudit v3: Aktionen mit Eingaben, vollständigem Vorher-/Nachher-Zustand und FNV-1a-Prüfsummen; deterministische Verifikation per `AetherEngine.replayAudit(audit)`.
-- Ereignis-Replay im Kampfprotokoll zum schrittweisen Lesen vollständiger Zustände. **Kein Rückgängigmachen von Aktionen.**
-- Erschöpfung anhand tatsächlicher Stapelverfügbarkeit statt Handkapazität; Pflichtverbrennen bleibt.
-- Effektwarteschlange stoppt bei Kampfsieg; zusätzliche Siegprüfung nach Ordensreaktionen; Betäubung verkürzt bestehende Dauer nicht.
-- Beschwörungs-Durchdringung wird nur einmal protokolliert.
-- Drei KI-Stufen (Einfach / Normal / Schwer) mit taktischer Feldbewertung.
-- Angriffsvorschau mit Schutzabsorption und tödlichen Treffern, ohne Folgereaktionen.
-- Animationstempo (aus/schnell/normal/langsam), dauerhafte Kartenfarben relativ zu Basiswerten.
-- Vorhandene 100 Karten, Deckbau, Admin-Testlabor, Cache-Refresh und Aufgeben bleiben.
+Deck-Kreislauf: Wenn der Nachziehstapel leer ist und die Ablage Karten enthält, wird sie deterministisch neu gemischt. Der 1./2./3. und jeder weitere Kreislauf kostet 1/2/3 ungeschützte Lebenspunkte. Sind beide leer, gilt weiterhin Erschöpfung.
 
-## Grenzen
-- Multiplayer ist **noch nicht implementiert**. Die deterministische Replay-Funktion ist eine Grundlage, aber kein sicheres Serverprotokoll.
-- Replays verwenden dieselbe Engine, sind daher kein unabhängiger Regelbeweis. Die vollständigen Ereignis-Snapshots dienen zur Diagnose.
-- Kein echter Safari-Test durchgeführt.
-- Animationen zeigen Kartenänderungen, keine schwebenden Statuszahlen auf Helden.
+Audit: Korrekte firstEvent/lastEvent-Grenzen, actionId pro Ereignis, präzisere Lebensraub-/Durchdringungs- und Todesmeldungen, Markierung offener Todesvorgänge. Kein Undo. Replay und Seed bleiben deterministisch.
 
-## Verifikation
-`node --check engine.js && node --check game.js && node test_v22.js` (Testskript liegt im Entwicklungsverzeichnis, nicht in der ZIP).
+ACHTUNG: Dies ist ein experimenteller Regelwechsel. Alte v2.2-Kampf-JSON-Dateien müssen mit der v2.2-Engine reproduziert werden; v2.3 ist nicht rückwärtskompatibel. PvP braucht später einen autoritativen Server und Reduktion der verdeckten Zustandsdaten im Netzwerk.
+
+Installation: Die sechs Webdateien im Repository ersetzen; index.html enthält Cache-Busting v2.3.
