@@ -1,7 +1,7 @@
-# NACHTSIEGEL v2.8 – Mobile Querformat-Arena
+# NACHTSIEGEL v2.9 – Querformat-Korrektur
 
-Verbesserung gegenüber v2.7: ausklappbare Ritualaktionsleiste mit allen vier Fähigkeiten und Zug beenden, Touch-Langdruck für große Kartendetails, überarbeitetes kompaktes Layout. Im Querformat bleibt die Spielarena sichtbar. Im Hochformat Drehhinweis.
+Die v2.5-Engine bleibt unverändert. v2.9 korrigiert die mobile Arena: Beschwörungs-/Zielhinweise verdecken nicht länger das gesamte Spielfeld, Heldenanzeigen passen in die linke Spalte, Kartenhand und Pfadreihen erhalten bereinigte Abmessungen.
 
-**Engine unverändert gegenüber v2.5/v2.7.** Multiplayer ist nicht implementiert. Auf iOS kann die Webseite den Bildschirm nicht selbst drehen.
+GitHub Pages: Den INHALT dieses Ordners in den Branch `main` im Repository-Root kopieren. Den Unterordner `assets/` erhalten. Alle vier SVGs liegen darin. GitHub Pages muss auf `main / (root)` zeigen.
 
-Dateien komplett in den `main`-Branch, inklusive echtem Ordner `assets/`, hochladen. GitHub Pages: `main` / `(root)`.
+Auf iPhone in Safari Querformat verwenden; Vollbild über Zum Home-Bildschirm verbessert den verfügbaren Platz. Kein natives Landscape-Lock im Browser.
