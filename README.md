@@ -1,11 +1,10 @@
-# NACHTSIEGEL v2.3 – Pfadkontrolle und Kampfaudit
+# NACHTSIEGEL v2.4 – Taktische Pfadkontrolle
 
-Neue Siegbedingung: Drei Nachtsiegel, je eines am Ende der eigenen Angriffsphase mit mindestens drei unbestrittenen besetzten Pfaden. Alternativ Sieg durch gegnerische HP = 0. Siegel sind dauerhaft und öffentlich sichtbar.
-
-Deck-Kreislauf: Wenn der Nachziehstapel leer ist und die Ablage Karten enthält, wird sie deterministisch neu gemischt. Der 1./2./3. und jeder weitere Kreislauf kostet 1/2/3 ungeschützte Lebenspunkte. Sind beide leer, gilt weiterhin Erschöpfung.
-
-Audit: Korrekte firstEvent/lastEvent-Grenzen, actionId pro Ereignis, präzisere Lebensraub-/Durchdringungs- und Todesmeldungen, Markierung offener Todesvorgänge. Kein Undo. Replay und Seed bleiben deterministisch.
-
-ACHTUNG: Dies ist ein experimenteller Regelwechsel. Alte v2.2-Kampf-JSON-Dateien müssen mit der v2.2-Engine reproduziert werden; v2.3 ist nicht rückwärtskompatibel. PvP braucht später einen autoritativen Server und Reduktion der verdeckten Zustandsdaten im Netzwerk.
-
-Installation: Die sechs Webdateien im Repository ersetzen; index.html enthält Cache-Busting v2.3.
+- Neues Siegfenster: mindestens 3 unbestrittene Pfade am Ende von zwei aufeinanderfolgenden eigenen Angriffsphasen. Verlust der Kontrolle setzt eigene Serie auf 0.
+- Pfadmanöver: 3 Resonanz, einmal je Zug, Kreatur auf freien benachbarten Pfad verschieben.
+- Pfadwacht: 2 Resonanz, einmal je Zug, +2 Heldenschild und +1 HP einer gewählten eigenen Kreatur (bis Basis-Maximum).
+- Kartennachzug: erste eigene Runde 3, später 1 statt 2 Karten; Beschwörungen weiterhin maximal 2 je Zug.
+- Visualisierung der fünf Pfade, Kontrollstände und Siegfenster im Schlachtfeld.
+- Alle neuen Aktionen im deterministischen JSON-Audit und Replay.
+- Keine Rückgängig-Funktion, kein Multiplayer implementiert.
+- Testlabor / experimentelle Balance; alte v2.3-Audits nicht mit v2.4 nachsimulieren.
