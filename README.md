@@ -1,43 +1,23 @@
-# ÄTHERBRUCH v0.5 – Die Chronik der Namenlosen
+# NACHTSIEGEL v0.6 — iPhone / GitHub Pages
 
-Ein mobiloptimierter, offline-fähiger (nach Laden der Dateien; Webfonts benötigen beim ersten Besuch Internet) Fantasy-Kartenprototyp für Safari und GitHub Pages. Keine Installation, keine Build-Schritte, keine Bibliotheken.
+## Installation
+Alle fünf Webdateien (`index.html`, `engine.js`, `game.js`, `style.css`, `manifest.webmanifest`) ins Wurzelverzeichnis des GitHub-Pages-Repositories hochladen und alte Versionen ersetzen. Keine Unterordner hochladen. `tests.js` und `ui-smoke.test.js` sind optional.
 
-## Veröffentlichung vom iPhone
+## Änderungen
+- Neues vorläufiges Branding NACHTSIEGEL; 88 Kartentypen (16 neue Karten), vier echte einzigartige legendäre Bosskarten.
+- Münzwurf und Stapelmischung verwenden im Browser `crypto.getRandomValues` als Seed. Bei jedem Neustart wird neu gemischt.
+- Energie startet bei 2 und steigt bei 5/10/15 Resonanz auf 3/4/5. Vollresonanz verleiht zusätzlich 2 Schild pro eigenem Zug. Ordenswechsel +2 Resonanz.
+- Schild hält bis Verbrauch (max. 24); Block verfällt beim nächsten eigenen Zug.
+- Kompakte Pocket-Sammlung (vier Karten pro Reihe auf kleinen Smartphones), Filter, kompakte Deckliste.
+- Getrennter Shop, Booster 240 Splitter, drei Karten mit mindestens einer seltenen, Verteilung 67/25/7/1 %.
+- Zurücksetz-Kobold (Startdeck), drei Modi (Chronik, Endloser Pfad, Rissduell), zusätzliche Effekte und CSS-Animationen.
+- Gegnerprotokoll farblich markiert.
 
-1. ZIP in der iPhone-App **Dateien** entpacken.
-2. Im GitHub-Repository `jagarex-lab/duel-deck` die **fünf** Dateien `index.html`, `style.css`, `engine.js`, `game.js` und `manifest.webmanifest` ins Hauptverzeichnis hochladen bzw. ersetzen. `tests.js` und README sind optional.
-3. Änderungen committen und GitHub Pages abwarten.
-4. `https://jagarex-lab.github.io/duel-deck/?v=5` in Safari öffnen.
-
-**Wichtig:** v0.5 benutzt neue Dateinamen `engine.js` und `style.css`. Nur `index.html` und `game.js` zu ersetzen genügt nicht.
-
-## Regeln
-
-- Münzwurf entscheidet deterministisch aus dem Spielseed, wer beginnt.
-- 18–24 Karten im Deck, maximal 3 Kopien je Kartentyp; 5 Handkarten maximal. Ungespielte Handkarten bleiben liegen. Bei Überfüllung wählt der Spieler, was verbrannt wird.
-- Jede Seite hat 3 Grundenergie. Wechsel zwischen Karten verschiedener Orden erzeugt Resonanz; ab 4 bzw. 8 Resonanz erhält man +1 bzw. +2 Energie je Zug. Resonanzkarten beschleunigen den Aufbau.
-- Block absorbiert Schaden zuerst und verfällt zu Beginn des nächsten eigenen Zugs; Schild absorbiert danach und bleibt erhalten, maximal 30.
-- Beide Seiten besitzen endliche Decks und erhalten steigenden Erschöpfungsschaden, wenn sie ohne Nachziehkarten ziehen.
-- Gegner besitzt Karten, Energie, Hand, Deck, Schild, Block und protokollierte Aktionen. Die KI ist heuristisch und muss noch durch Simulationsturniere balanciert werden.
-- 72 Kartenarten aus vier Orden, lokale Sammlung, Filter, Deckeditor, Kartenpakete gegen Spielwährung, Prolog, Spielstand-Export/Import.
-
-## Spielstand-Migration
-
-v0.5 verwendet `aetherbruch-v05-save`. Bei der ersten Ausführung werden aus `duel-deck-save-v1` Münzen, Kapitel, Siege und Niederlagen übernommen und 200 Splitter als Umstiegsbonus gewährt. **Alte Karten-IDs sind nicht kompatibel**: die Sammlung wird als neues Startdeck angelegt. Alte Daten bleiben unverändert gespeichert. Wer seinen alten Spielstand sichern möchte, sollte ihn vor dem Update aus v0.4 exportieren.
+## Einschränkungen
+Die Spielbalance ist ein erster Entwurf, nicht statistisch ausbalanciert. Animationen sind einfache CSS-Übergänge, keine 3D-Beschwörungssequenzen. Das Design verwendet weiterhin Platzhalter statt individueller Illustrationen. Der Name ist ein Arbeitstitel.
 
 ## Tests
+`node --check engine.js`, `node --check game.js`, `node tests.js`, `node ui-smoke.test.js`. Browser-Tests auf echtem iPhone wurden nicht durchgeführt.
 
-`node tests.js` (Node.js ab Version 18). Engine ist deterministisch, ohne externe Abhängigkeiten.
-
-## Status
-
-Spielbarer Prototyp, kein produktionsreifes App-Store-Spiel. Kartenillustrationen sind bewusst individuell gerahmte Platzhalter. Die Mechanik ist ein eigener Prototyp; absolute weltweite Neuheit wird nicht behauptet. Vor kommerzieller Veröffentlichung: ausführliche Balance-, UX-, Datenschutz-, Rechte- und App-Store-Tests.
-
-## Hotfix v0.5.1 (02.11.2026)
-- Kritischen Startabsturz in `starterOwned()` behoben (`Object.fromEntries` wurde falsch auf ein Objekt angewendet).
-- Ungültige importierte Decks werden abgelehnt; ältere gespeicherte Decks werden beim Start auf das gültige Startdeck zurückgesetzt.
-- Speicherfehler im Browser werden abgefangen, damit die Oberfläche nicht vollständig abstürzt.
-- Alle JavaScript- und CSS-Dateien verwenden `?v=5.1` zur Cache-Aktualisierung auf Safari.
-- Tests: `node tests.js`, `node ui-smoke.test.js`, `node --check game.js`, `node --check engine.js`.
-
-**Wichtig:** Der UI-Smoke-Test verwendet eine simulierte DOM-Umgebung. Ein echter Safari-Test auf iPhone wurde nicht durchgeführt; dies ist keine Garantie auf Fehlerfreiheit. Bitte den bestehenden Spielstand vor dem Update exportieren.
+## Spielstand
+Verwendet den bisherigen lokalen Speicher `aetherbruch-v05-save`, importiert die v0.5-Sammlung. Vor Aktualisierung bitte exportieren. Laufende Kämpfe werden nicht gespeichert.
