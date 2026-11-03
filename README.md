@@ -1,18 +1,15 @@
-# NACHTSIEGEL v1.0 – Balance-Hotfix
+# NACHTSIEGEL v1.2 – Phasen & Kartenverbrennung
 
-GitHub Pages: Dateien index.html, engine.js, game.js, style.css, manifest.webmanifest direkt in das Repository-Hauptverzeichnis laden. Nicht den Ordner hochladen. Safari lädt JS/CSS mit ?v=10.
+## Installation
+Die Dateien `index.html`, `engine.js`, `game.js`, `style.css` und `manifest.webmanifest` im Stammverzeichnis des GitHub-Pages-Repositories ersetzen. Browsercache ggf. aktualisieren (`?v=12`).
 
 ## Änderungen
-- 25 Karten im Startdeck; vorhandene v0.9-Spielstände mit 20 Karten werden beim Laden automatisch auf 25 ergänzt. Spielstand vorher exportieren.
-- Gegnerdeck: ebenfalls 25 Karten. Gegnerauswahl bleibt zufällig; die Kartenauswahl und Deckstärke sind noch nicht vollständig gleichwertig.
-- Erschöpfung: maximal einmal pro eigenem Zug, nur wenn Hand und Nachziehstapel leer sind. 1, 2, 3, danach maximal 3 Schaden pro betroffenem Zug.
-- Tatsächlich gezogene Karten werden korrekt protokolliert, dazu Restkarten im Stapel.
-- Zweiter Spieler erhält 4 dauerhafte Schildpunkte als Ausgleich.
-- Keine Änderungen an der Sammlung, Shop, Resonanz, den fünf Pfaden oder den 100 Kreaturen.
+- Nachziehphase: Ab dem zweiten eigenen Zug darfst du Karten **gezielt aus der Hand verbrennen**, bevor bis zu zwei Karten gezogen werden. Das Handlimit von sechs wird strikt eingehalten. Ohne freie Plätze werden weniger Karten gezogen. Verbrennung geht in den Ablagestapel; damit ist die Entscheidung relevant für den Erinnerungsruf.
+- Sichtbare Phasen: Nachziehen → Beschwören/Resonanz → Angriff → Zugende. Angriffe werden weiterhin durch `Zug beenden` ausgelöst.
+- Kampf-Feedback: Ereignisfeld mit farblich unterschiedlichen Treffer-, Heilungs- und Beschwörungseffekten, animierte Phasenmarkierung und Kreaturen-Einblendungen; reduzierte Bewegung respektiert.
+- Nichtlegendäre Ordensimpuls-Karten wurden in Resonanzkarten umgewandelt; nur die vier legendären Kreaturen erhalten `pulse`.
+- Schwächung wirkt bis zum Ende des nächsten Angriffs der betroffenen Seite und verfällt erst **danach**.
+- Bestehender Speicherstand bleibt unter dem bisherigen lokalen Schlüssel erhalten.
 
-## Automatisierte Tests
-`node tests.js`
-`node ui-smoke.test.js`
-`node simulate.js 2000`
-
-Das Ergebnis der 2.000 deterministischen Simulationen steht in balance-v10.json. Sie sind ein KI-Benchmark, kein echter iPhone-Safari-Test und kein Beweis für vollständige Balance.
+## Einschränkung
+Die Kampfereignisse werden derzeit als animiertes Ereignisfeld und Chronik visualisiert, nicht als vollständige sequenzielle 3D-/Partikelanimation pro Angriff. Der Gegnerzug wird weiterhin synchron berechnet.
