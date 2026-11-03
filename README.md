@@ -1,7 +1,13 @@
-NACHTSIEGEL v1.8 – gezielte Beschwörungsschläge
+# NACHTSIEGEL v1.9 – Kartenstatus & Logikprüfung
 
-- Bei einem Angriff auf einen leeren Gegenpfad wird der gegnerische Held getroffen (Block, dann Schild, dann Lebenspunkte).
-- Ankunftsschlag beim Beschwören: bei vorhandenen gegnerischen Kreaturen wählt der Spieler das gegnerische Ziel; die KI wählt ein Ziel automatisch.
-- Ohne gegnerische Kreaturen trifft Ankunftsschlag den Helden und berücksichtigt Block und Schild.
-- Während einer offenen Zielauswahl sind weitere Beschwörungen und das Zugende gesperrt.
-- Frühere Spielfortschritte bleiben mit dem bestehenden Speicher-Schlüssel kompatibel.
+Installiere die sechs Dateien im Stammverzeichnis des GitHub-Pages-Repositories.
+
+## Änderungen
+- Statusdifferenzen ausschließlich direkt auf Kreaturenkarten: Lebenspunkte, Angriff, Betäubung (rot für negativ, grün für positiv). Keine schwebenden Statuszahlen über Helden oder Ressourcen.
+- Die Wiedergabe verwendet die tatsächlichen protokollierten Kampfzustände. Nach einem finalen Schlag wird das Kampfergebnis erst nach der Animation eingeblendet; Animation überspringen bleibt verfügbar.
+- Vergeltung wird nicht mehr ausgelöst, wenn der Verteidiger durch den Angriff bereits gefallen ist oder kein Angriffsschaden verursacht wurde.
+- Betäubte Kreaturen verlieren nach ihrer ausgesetzten Angriffsphase die Beschwörungsverzögerung, sodass sie nicht noch einen zusätzlichen Zug warten müssen.
+- Mehrfaches Protokollieren eines Siegs wird verhindert.
+- Angriffe auf freie Gegenfelder treffen weiterhin den Helden; zuerst Block, dann Schild, dann Leben.
+
+Hinweis: Bestehende Spielstände bleiben erhalten; vor dem Aktualisieren exportieren. Echter iPhone-Safari-Test noch ausstehend.
