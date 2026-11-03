@@ -1,5 +1,7 @@
-NACHTSIEGEL v1.7 – Kampf-Zwischenzustände
+NACHTSIEGEL v1.8 – gezielte Beschwörungsschläge
 
-Kampfanimationen zeigen jetzt die tatsächlichen gespeicherten Spielfeldzustände nach jeder Ereignismeldung, einschließlich HP, Schild, Block und Kreaturenpositionen. Animation überspringen stellt den endgültigen Spielzustand sofort wieder her. Die Engine protokolliert pro Ereignis einen kompakten Zustand. Bestehende Spielstände bleiben kompatibel.
-
-Hinweis: Simulationen und automatische Tests ersetzen keinen realen Safari-Test.
+- Bei einem Angriff auf einen leeren Gegenpfad wird der gegnerische Held getroffen (Block, dann Schild, dann Lebenspunkte).
+- Ankunftsschlag beim Beschwören: bei vorhandenen gegnerischen Kreaturen wählt der Spieler das gegnerische Ziel; die KI wählt ein Ziel automatisch.
+- Ohne gegnerische Kreaturen trifft Ankunftsschlag den Helden und berücksichtigt Block und Schild.
+- Während einer offenen Zielauswahl sind weitere Beschwörungen und das Zugende gesperrt.
+- Frühere Spielfortschritte bleiben mit dem bestehenden Speicher-Schlüssel kompatibel.
