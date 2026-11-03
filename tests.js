@@ -1,13 +1,20 @@
 const assert=require('node:assert/strict');const E=require('./engine.js');let passed=0;function test(name,fn){fn();passed++;console.log('✓ '+name)}
-test('88 unique cards',()=>{assert.equal(E.CARDS.length,88);assert.equal(new Set(E.CARDS.map(x=>x.id)).size,88)});
+test('100 unique cards',()=>{assert.equal(E.CARDS.length,100);assert.equal(new Set(E.CARDS.map(x=>x.id)).size,100)});
 test('starting deck legal',()=>assert.equal(E.validateDeck(E.START),''));
 test('minimum and maximum deck',()=>{assert.ok(E.validateDeck(E.START.slice(1)));assert.ok(E.validateDeck([...E.START,...E.START.slice(0,7)]))});
 test('coin toss deterministic',()=>{assert.equal(E.createBattle(E.START,234).coin,E.createBattle(E.START,234).coin)});
 test('no reshuffle',()=>{let b=E.createBattle(E.START,88);assert.equal(b.hero.deck.length+b.hero.hand.length,18)});
 test('shield persists, block absorbs first',()=>{let p={hp:40,ward:8,block:5};E.damage(p,9);assert.equal(p.block,0);assert.equal(p.ward,4);assert.equal(p.hp,40)});
 test('shield cap & play log',()=>{let b=E.createBattle(E.START,8);assert.ok(b.log.length>0);assert.ok(['hero','enemy'].includes(b.active))});
-test('enemy finite hand',()=>{let b=E.createBattle(E.START,8);assert.ok(b.enemy.hand.length<=5)});
+test('enemy finite hand',()=>{let b=E.createBattle(E.START,8);assert.ok(b.enemy.hand.length<=6)});
 test('same faction no resonance',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=['ash-0','ash-0'];b.hero.energy=4;E.play(b,'hero',0);E.play(b,'hero',0);assert.equal(b.hero.resonance,0)});
 test('cross order generates resonance',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=['ash-0','tide-0'];b.hero.energy=4;E.play(b,'hero',0);E.play(b,'hero',0);assert.equal(b.hero.resonance,2)});
-test('hand overflow requires discard',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=Array(6).fill('ash-0');assert.equal(E.endTurn(b,'hero'),false);assert.equal(E.discard(b,0),true);assert.equal(b.hero.hand.length,5)});
+test('hand overflow requires discard',()=>{let b=E.createBattle(E.START,11);b.active='hero';b.hero.hand=Array(7).fill('ash-0');assert.equal(E.endTurn(b,'hero'),false);assert.equal(E.discard(b,0),true);assert.equal(b.hero.hand.length,6)});
+test('first turn draws three',()=>{let b=E.createBattle(E.START,19);assert.equal(b.hero.turnsStarted===0?b.enemy.hand.length:b.hero.hand.length,3)});
+test('later turns draw two and cap at six',()=>{let b=E.createBattle(E.START,19);b.active='hero';b.hero.hand=['ash-0','ash-0','ash-0','ash-0','ash-0'];b.hero.turnsStarted=1;E.endTurn(b,'hero');assert.ok(b.hero.hand.length<=6);if(b.active==='hero')assert.equal(b.hero.hand.length,6)});
 console.log(`${passed} tests passed`);
+test('summoning uses a lane and persists',()=>{let b=E.createBattle(E.START,19);b.active='hero';b.hero.energy=3;b.hero.hand=['summon-0'];assert.equal(E.play(b,'hero',0,1),true);assert.equal(b.hero.lanes[1].attack,3);assert.equal(b.hero.hand.length,0)});
+test('summons strike opposite creature before hero',()=>{let b=E.createBattle(E.START,19);b.active='hero';b.hero.lanes[0]={id:'summon-0',hp:2,attack:3};b.enemy.lanes[0]={id:'summon-3',hp:2,attack:2};let hp=b.enemy.hp;E.strikeLanes(b,'hero');assert.equal(b.enemy.lanes[0],null);assert.equal(b.enemy.hp,hp)});
+test('summons deal direct damage if lane empty',()=>{let b=E.createBattle(E.START,19);b.hero.lanes[2]={id:'summon-0',hp:2,attack:3};b.enemy.ward=0;b.enemy.block=0;let hp=b.enemy.hp;E.strikeLanes(b,'hero');assert.equal(b.enemy.hp,hp-3)});
+test('full resonance burst spends eight',()=>{let b=E.createBattle(E.START,19);b.active='hero';b.hero.resonance=15;assert.equal(E.burst(b,'hero'),true);assert.equal(b.hero.resonance,7);assert.equal(b.hero.ward,5)});
+test('order reaction triggers its own bonus',()=>{let b=E.createBattle(E.START,19);b.hero.ward=0;let effect=E.applyReaction(b,'hero','tide','thorn');assert.ok(effect.includes('Schild'));assert.equal(b.hero.ward,4)});
